@@ -63,3 +63,21 @@ server.delete('/deleteProfile/:id',(req,res)=>{
         res.status(result.statusCode).json(result)
     })
 })
+
+server.post('/adminLogin',(req,res)=>{
+    logics.adminLogin(req.body.uname,req.body.pswd).then(result=>{
+        res.status(result.statusCode).json(result)
+    })
+})
+
+server.get('/getDonors',(req,res)=>{
+    logics.getAllDonors().then(result=>{
+        res.status(result.statusCode).json(result)
+    })
+})
+
+server.delete('/deleteDonor/:id',(req,res)=>{
+    logics.deleteDonor(req.params.id).then(result=>{
+        res.status(result.statusCode).json(result)
+    })
+})

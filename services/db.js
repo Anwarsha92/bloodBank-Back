@@ -20,7 +20,13 @@ const Donor=mongoose.model('Donor',
 }
 )
 
+const Admin=mongoose.model('Admin',
+{
+    uname:String,
+    pswd:String
+})
+
 
 module.exports={
-    Donor
+    Donor,Admin
 }

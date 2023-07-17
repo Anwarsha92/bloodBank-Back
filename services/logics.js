@@ -15,7 +15,7 @@ logIn = (username, psw) => {
         else {
             return {
                 status: false,
-                message: "Incorrect username number or password",
+                message: "Incorrect username or password",
                 statusCode: 400
             }
         }
@@ -52,7 +52,7 @@ registerDonor = (name, gender, dob, blood, district, place, email, mobile, last,
             newDonor.save()
             return {
                 status: true,
-                message: "Register success",
+                message: "Successfully registered as a Donor",
                 statusCode: 200
 
             }
@@ -169,6 +169,66 @@ deleteProfile = (id) => {
         }
     })
 }
+
+adminLogin = (uname, pswd) => {
+    return db.Admin.findOne({ uname, pswd }).then(admin => {
+        if (admin) {
+            return {
+                status: true,
+                message: "Login success",
+                statusCode: 200,
+                uname
+
+            }
+        }
+        else {
+            return {
+                status: false,
+                message: "No admin found",
+                statusCode: 400
+            }
+        }
+    })
+}
+
+getAllDonors=()=>{
+    return db.Donor.find().then(donors=>{
+        if(donors){
+            return{
+                status:true,
+                message:donors,
+                statusCode:200
+            }
+        }
+        else {
+            return {
+                status: false,
+                message: "No donors found",
+                statusCode: 400
+            }
+        }
+    })
+}
+
+deleteDonor = (id) => {
+    return db.Donor.deleteOne({username:id}).then(user => {
+        if (user) {
+
+            return {
+                status: true,
+                message: "Donor Deleted",
+                statusCode: 200,
+            }
+        }
+        else {
+            return {
+                status: false,
+                message: "No donor found",
+                statusCode: 400
+            }
+        }
+    })
+}
 module.exports = {
-    logIn, registerDonor, getDonor, donorsList, updateDonor, deleteProfile
+    logIn, registerDonor, getDonor, donorsList, updateDonor, deleteProfile, adminLogin,getAllDonors,deleteDonor
 }
